@@ -3,6 +3,8 @@ install.packages("fastDummies")
 install.packages("recommenderlab")
 install.packages("arules", dependencies = TRUE)
 install.packages("arulesViz", dependencies = TRUE)
+install.packages("RODBC")
+install.packages("RMySQL")
 library(reshape2)
 library(Hmisc)
 library(dplyr)
@@ -12,6 +14,8 @@ library(fastDummies)
 library(arules)
 library(arulesViz)
 library(recommenderlab)
+library(RODBC)
+library(RMySQL)
 
 rm(list = ls()); gc(reset = T)
 books <- read.csv("Books_Information.csv")
@@ -243,6 +247,46 @@ series <- read.csv("Series.csv")
 series$Number <- paste0('s', series$Number)
 write.csv(series, "Series.csv", row.names = F)
 write.csv(books, "Books_Information_maybefinal.csv", row.names = F)
+
+# Delete Series, Sellnum, Price & Pagenum Variables
+# Merge Title, Writer
+books <- read.csv("Books_Information_maybefinal.csv")
+books[, c(3, 5, 7 : 16)] <- NULL
+title <- read.csv("Title.csv")
+colnames(books)[1] <- "Number"
+writer <- read.csv("Writer.csv")
+books <- merge(title, books, by = "Number", all.y = T)
+books[, 1] <- NULL
+colnames(books)[2] <- "Number"
+books <- merge(writer, books, by = "Number", all.y = T)
+books <- books[, c(2, 1, 4, 3, 5 : dim(books)[2])]
+write.csv(books, "Books_Information_semifinal.csv", row.names = F)
+
+
+# Melt datas
+books <- read.csv("Books_Information_semifinal.csv")
+# first. Novel
+melt_book <- melt(books, id.vars = c(1 : 4, 19 : 26))
+melt_book <- melt_book %>% arrange(Title)
+novellist <- c("없음", "한국", "영미", "일본", "중국", "스페인/중남미", "프랑스",
+                "독일", "러시아", "이탈리아", "동유럽", "북유럽", "기타국가", "작가선집")
+formulastr <- colnames(melt_book)[1]
+for(i in 2 : 12){
+  formulastr <- paste0(formulastr, "+", colnames(melt_book)[i])
+}
+index <- which(melt_book$value == 1)
+test <- melt_book
+test$variable <- "Novel"
+head(dcast(test, as.formula(paste0(formulastr, "~variable")), sum))
+
+
+# RMySQL
+con <- dbConnect(MySQL(), username = "root",
+                password = "1234", host = "localhost",
+                port = 3306, dbname = "R")
+dbListTables(con)
+dbGetQuery(con, "select user_email, user_priority from usertbl")
+
 
 # 고객 데이터 만들기 / 유사도 측정
 books <- read.csv("Books_Information_maybefinal.csv")
