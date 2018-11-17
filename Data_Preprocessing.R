@@ -263,9 +263,9 @@ books <- books[, c(2, 1, 4, 3, 5 : dim(books)[2])]
 write.csv(books, "Books_Information_semifinal.csv", row.names = F)
 
 
-# Melt datas
+# Melt data
 books <- read.csv("Books_Information_semifinal.csv")
-# first. Novel
+# First. Novel
 melt_book <- melt(books, id.vars = c(1 : 4, 19 : 26))
 melt_book <- melt_book %>% arrange(Title)
 novellist <- c("없음", "한국", "영미", "일본", "중국", "스페인/중남미", "프랑스",
@@ -275,9 +275,32 @@ for(i in 2 : 12){
   formulastr <- paste0(formulastr, "+", colnames(melt_book)[i])
 }
 index <- which(melt_book$value == 1)
-test <- melt_book
-test$variable <- "Novel"
-head(dcast(test, as.formula(paste0(formulastr, "~variable")), sum))
+melt_book$variable <- "Novel"
+melt_book <- dcast(melt_book, as.formula(paste0(formulastr, "~variable")), sum)
+for(i in 1 : nrow(melt_book)){
+  novelindex <- ifelse(index[i] %% 14 == 0, 14, index[i] %% 14)
+  melt_book[i, "Novel"] <- novellist[novelindex]
+}
+write.csv(melt_book, "Books_Information_meltcastnovel.csv", row.names = F)
+# Second. Genre
+melt_book1 <- read.csv("Books_Information_meltcastnovel.csv")
+melt_book1 <- melt(melt_book1, id.vars = c(1 : 4, 13))
+melt_book1 <- melt_book1 %>% arrange(Title)
+genrelist <- c("추리", "공포", "판타지", "무협", "SF", "스릴러", "역사", "없음")
+formulastr <- colnames(melt_book1)[1]
+for(i in 2 : 5){
+  formulastr <- paste0(formulastr, "+", colnames(melt_book1)[i])
+}
+index <- which(melt_book1$value == 1)
+melt_book1$variable <- "Genre"
+test <- dcast(test, as.formula(paste0(formulastr, "~variable")), sum)
+test <- test %>% filter(Genre == 3) # delete 4 Genre book
+
+test <- dcast(test, as.formula(paste0(formulastr, "~variable")), sum)
+melt_book <- dcast(melt_book, as.formula(paste0(formulastr, "~variable")), sum)
+for(i in 1 : nrow(melt_book1)){
+  genreindex <- ifelse()
+}
 
 
 # RMySQL
