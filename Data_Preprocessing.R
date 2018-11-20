@@ -333,13 +333,65 @@ customer_rule <- apriori(customer_tran)
 summary(customer_rule)
 inspect(customer_rule)
 
-# Make Model
-test <- merge(customer, books, by = "Title", all.x = T)
-colnames(test)
-total <- test %>% group_by(id) %>% summarise(n = n())
-for(i in c(3, 4, 8 : dim(test)[2])){
-  t <- test %>% group_by(id, !!as.name(colnames(test)[i])) %>% 
-    summarise(n = n()) %>% dcast(as.formula(paste0("id~", colnames(test)[i])), 
-                                 value.var = "n")
-  total <- cbind(total, t[, 2 : length(t )])
+# Because of wrong novel and genre data, start again from the beginning
+rm(list = ls()); gc(reset = T)
+books <- read.csv("Books_Information.csv")
+options(scipen = 10)
+books <- books %>% arrange(Title)
+books[, c("Publisher", "Series", "Price", "Pagenum", "Sellnum", "Avail19")] <- NULL
+books <- books[, c(1, 2, 4, 3, 5, 6)]
+merge_books <- books %>% group_by(Title, Writer) %>% summarise(n = n())
+books <- merge(books, merge_books, by = c("Title", "Writer"), all.x = T)
+books_one_index <- which(books$n == 1)
+books_one <- books[books_one_index, ]
+books <- books[-books_one_index, ]
+# Novel & Genre Preprocessing
+# 1. n == 2
+books_two <- books %>% filter(n == 2)
+books <- books %>% filter(n != 2)
+# (1) Genre
+melt_books_two_genre <- books_two[, c(1, 2, 6)]
+melt_books_two_genre <- melt(melt_books_two_genre, id.vars = c(1, 2))
+levels(melt_books_two_genre$variable)[1] <- "Genre1"
+melt_books_two_genre$variable <- factor(melt_books_two_genre$variable,
+                                        levels = c("Genre1", "Genre2"))
+for(i in seq(2, dim(melt_books_two_genre)[1], 2)){
+  melt_books_two_genre$variable[i] <- "Genre2"
 }
+melt_books_two_genre <- dcast(melt_books_two_genre, Title + Writer ~ variable)
+books_two[, "Genre"] <- NULL
+books_two <- merge(books_two, melt_books_two_genre, 
+                   by = c("Title", "Writer"), all.x = T)
+# (2) Novel
+melt_books_two_novel <- books_two[, c(1, 2, 5)]
+melt_books_two_novel <- melt(melt_books_two_novel, id.vars = c(1, 2))
+melt_books_two_novel$variable <- factor(melt_books_two_novel$variable,
+                                        levels = c("Novel", "Novel2"))
+for(i in seq(2, dim(melt_books_two_novel)[1], 2)){
+  melt_books_two_novel$variable[i] <- "Novel2"
+}
+melt_books_two_novel <- dcast(melt_books_two_novel, Title + Writer ~ variable)
+books_two[, "Novel"] <- NULL
+melt_books_two_novel$Novel <- NULL
+colnames(melt_books_two_novel)[3] <- "Novel"
+books_two <- merge(books_two, melt_books_two_novel,
+                   by = c("Title", "Writer"), all.x = T)
+# (3) Group
+books_two <- books_two %>% group_by(Title, Writer, Novel, Genre1, Genre2) %>% 
+  summarise(Score = median(Score), Reviewcount = round(mean(Reviewcount)))
+colnames(books_one)[6] <- "Genre1"
+books_one$Genre2 <- "X"
+books_one$n <- NULL
+books_one <- books_one[, c(1, 2, 5, 6, 7, 3, 4)]
+books_two <- as.data.frame(books_two)
+books_onetwo <- rbind(books_one, books_two)
+rm(books_one, books_two, melt_books_two_genre, melt_books_two_novel, 
+   i, books_one_index, merge_books); gc(reset = T)
+write.csv(books_onetwo, "Books_Information_onetwodata.csv", row.names = F)
+write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
+
+# 2. n == 3
+books_three <- books %>% filter(n == 3)
+books <- books %>% filter(n != 3)
+# (1) Genre
+melt_books_three_genre <- books[, c(1, 2, 6)]
