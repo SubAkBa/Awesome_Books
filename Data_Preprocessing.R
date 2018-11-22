@@ -391,7 +391,138 @@ write.csv(books_onetwo, "Books_Information_onetwodata.csv", row.names = F)
 write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
 
 # 2. n == 3
+books <- read.csv("Books_Information_theotherdata.csv")
 books_three <- books %>% filter(n == 3)
 books <- books %>% filter(n != 3)
 # (1) Genre
-melt_books_three_genre <- books[, c(1, 2, 6)]
+melt_books_three_genre <- books_three[, c(1, 2, 6)]
+melt_books_three_genre <- melt(melt_books_three_genre, id.vars = c(1, 2))
+melt_books_three_genre$variable <- factor(melt_books_three_genre$variable,
+                                        levels = c("Genre", "Genre2", "Genre3"))
+levels(melt_books_three_genre$variable)[1] <- "Genre1"
+for(i in 1 : 3){
+  melt_books_three_genre$variable[
+    seq(i, dim(melt_books_three_genre)[1], 3)] <- paste0("Genre", i)
+}
+melt_books_three_genre <- dcast(melt_books_three_genre, Title + Writer ~ variable)
+books_three$Genre <- NULL
+books_three <- merge(books_three, melt_books_three_genre, 
+                     by = c("Title", "Writer"), all.x = T)
+# (2) Novel
+melt_books_three_novel <- books_three[, c(1, 2, 5)]
+melt_books_three_novel <- melt(melt_books_three_novel, id.vars = c(1, 2))
+melt_books_three_novel$variable <- factor(melt_books_three_novel$variable,
+                                          levels = c("Novel", "Novel2", "Novel3"))
+levels(melt_books_three_novel$variable)[1] <- "Novel1"
+for(i in 1 : 3){
+  melt_books_three_novel$variable[
+    seq(i, dim(melt_books_three_novel)[1], 3)] <- paste0("Novel", i)
+}
+melt_books_three_novel <- dcast(melt_books_three_novel, Title + Writer ~ variable)
+# Fill Novel
+melt_books_three_novel$Novel3 <- 
+  ifelse(melt_books_three_novel$Writer == "애거사 크리스티", 
+         "영미소설", melt_books_three_novel$Novel3)
+melt_books_three_novel$Novel3 <- 
+  ifelse(melt_books_three_novel$Writer == "아서 코난 도일", 
+         "영미소설", melt_books_three_novel$Novel3)
+melt_books_three_novel$Novel3 <- 
+  ifelse(melt_books_three_novel$Writer == "존 딕슨 카", 
+         "러시아소설", melt_books_three_novel$Novel3)
+# (2) Novel - continue
+books_three$Novel <- NULL
+books_three <- merge(books_three, melt_books_three_novel, 
+                     by = c("Title", "Writer"), all.x = T)
+books_three[, c(5, 9, 10)] <- NULL
+colnames(books_three)[8] <- "Novel"
+# (3) Group
+books_onetwo <- read.csv("Books_Information_onetwodata.csv")
+books_onetwo$Genre3 <- "X"
+books_onetwo <- books_onetwo[, c(1, 2, 3, 4, 5, 8, 6, 7)]
+books_three <- books_three %>% group_by(Title, Writer, Novel, Genre1, Genre2, Genre3) %>% 
+  summarise(Score = median(Score), Reviewcount = round(mean(Reviewcount)))
+books_three <- as.data.frame(books_three)
+# Removing Overlapped Genre
+for(i in 1 : dim(books_three)[1]){
+  if(books_three$Genre1[i] == books_three$Genre2[i]){
+    books_three$Genre2[i] <- books_three$Genre3[i]
+    books_three$Genre3[i] <- "X"
+  }
+}
+books_ott <- rbind(books_onetwo, books_three)
+# Fill Novel
+books_ott$Novel <- ifelse(books_ott$Writer == "애거사 크리스티", 
+                          "영미소설", books_ott$Novel)
+books_ott$Novel <- ifelse(books_ott$Writer == "아서 코난 도일", 
+                          "영미소설", books_ott$Novel)
+books_ott$Novel <- ifelse(books_ott$Writer == "C. V. 게오르규",
+                          "프랑스소설", books_ott$Novel)
+write.csv(books_ott, "Books_Information_ott.csv", row.names = F)
+write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
+
+# 3. n == 4
+books <- read.csv("Books_Information_theotherdata.csv")
+books_four <- books %>% filter(n == 4)
+books <- books %>% filter(n != 4)
+books_four$n <- NULL
+# (1) Genre
+melt_books_four_genre <- books_four[, c(1, 2, 6)]
+melt_books_four_genre <- melt(melt_books_four_genre, id.vars = c(1, 2))
+melt_books_four_group_genre <- melt_books_four_genre %>% 
+  group_by(Title, Writer, variable, value) %>% summarise(n = n())
+books_four_comple <- melt_books_four_group_genre %>% filter(n == 4) # All Same book
+melt_books_four_group_genre <- melt_books_four_group_genre %>% filter(n != 4)
+melt_books_four_group_genre$variable <- factor(melt_books_four_group_genre$variable,
+                                               levels = c("Genre", "Genre2",
+                                                          "Genre3", "Genre4"))
+levels(melt_books_four_group_genre$variable)[1] <- "Genre1"
+melt_books_four_group_genre$value <- 
+  ifelse(melt_books_four_group_genre$value == "X", NA, 
+         melt_books_four_group_genre$value)
+melt_books_four_group_genre <- melt_books_four_group_genre %>% 
+  arrange(Title, value)
+j <- 1
+for(i in 1 : (dim(melt_books_four_group_genre)[1] - 1)){
+  if(melt_books_four_group_genre$Title[i] == melt_books_four_group_genre$Title[i + 1]){
+    j <- j + 1
+  } else{
+    j <- 1
+  }
+  melt_books_four_group_genre$variable[i + 1] <- paste0("Genre", j)
+}
+melt_books_four_group_genre <- dcast(melt_books_four_group_genre,
+                                     Title + Writer ~ variable)
+melt_books_four_group_genre$Genre4 <- NULL
+melt_books_four_group_genre[is.na(melt_books_four_group_genre)] <- "X"
+# All Same book data PreProcessing
+books_four_comple <- dcast(books_four_comple, Title + Writer ~ variable)
+colnames(books_four_comple)[3] <- "Genre1"
+books_four_comple[, c("Genre2", "Genre3")] <- "X"
+books_four_comple <- rbind(books_four_comple, melt_books_four_group_genre)
+books_four$Genre <- NULL
+books_four <- merge(books_four, books_four_comple, by = c("Title", "Writer"), all.x = T)
+# (2) Novel
+melt_books_four_novel <- books_four[, c(1, 2, 5)]
+melt_books_four_novel <- melt(melt_books_four_novel, id.vars = c(1, 2))
+melt_books_four_novel$variable <- factor(melt_books_four_novel$variable,
+                                         levels = c("Novel", "Novel1",
+                                                    "Novel2", "Novel3"))
+levels(melt_books_four_novel$variable)[1] <- "Novel0"
+for(i in 1 : dim(melt_books_four_novel)[1]){
+  melt_books_four_novel$variable[i] <- paste0("Novel", (i + 3) %% 4)
+}
+melt_books_four_novel <- dcast(melt_books_four_novel, 
+                               Title + Writer ~ variable)
+melt_books_four_novel[, c(3 : 5)] <- NULL
+colnames(melt_books_four_novel)[3] <- "Novel"
+books_four$Novel <- NULL
+books_four <- merge(books_four, melt_books_four_novel, by = c("Title", "Writer"), all.x = T)
+books_four <- books_four[, c(1, 2, 8, 5, 6, 7, 3, 4)]
+# (3) Group
+books_four <- books_four %>% group_by(Title, Writer, Novel, Genre1, Genre2, Genre3) %>% 
+  summarise(Score = median(Score), Reviewcount = round(mean(Reviewcount)))
+books_four <- as.data.frame(books_four)
+books_data <- read.csv("Books_Information_ott.csv")
+books_data <- rbind(books_data, books_four)
+write.csv(books_data, "Books_Information_ottf.csv", row.names = F)
+write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
