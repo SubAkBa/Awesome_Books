@@ -526,3 +526,129 @@ books_data <- read.csv("Books_Information_ott.csv")
 books_data <- rbind(books_data, books_four)
 write.csv(books_data, "Books_Information_ottf.csv", row.names = F)
 write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
+
+# 4. n == 5
+books <- read.csv("Books_Information_theotherdata.csv")
+books_five <- books %>% filter(n == 5)
+books <- books %>% filter(n != 5)
+books_five$n <- NULL
+# (1) Novel
+books_five$Novel <- as.character(books_five$Novel)
+books_five$Novel <- ifelse(books_five$Writer %in% c("애거사 크리스티", "코넬 울리치",
+                                                    "엘러리 퀸", "칼릴 지브란",
+                                                    "마거릿 애트우드", "대프니 듀 모리에"),
+                           "영미소설", books_five$Novel)
+books_five$Novel <- ifelse(books_five$Writer == "모리스 르블랑",
+                           "프랑스소설", books_five$Novel)
+books_five$Novel <- ifelse(books_five$Writer == "나관중",
+                           "중국소설", books_five$Novel)
+books_five$Novel <- ifelse(books_five$Writer == "안네 프랑크",
+                           "독일소설", books_five$Novel)
+books_index <- which(books_five$Novel == "기타 국가의 소설")
+books_five[books_index, "Novel"] <- books_five[books_index - 1, "Novel"]
+# (2) Genre
+books_five_genre_group <- books_five %>% group_by(Title, Writer, Genre) %>% 
+  summarise(n = n())
+books_five_comple <- books_five_genre_group %>% filter(n == 5)
+books_five_comple <- as.data.frame(books_five_comple)
+books_five_notcomple <- books_five_genre_group %>% filter(n != 5)
+books_five_notcomple$n <- NULL
+books_five_notcomple <- melt(books_five_notcomple, id.vars = c(1, 2))
+books_five_notcomple$value <- ifelse(books_five_notcomple$value == "X",
+                                     NA, books_five_notcomple$value)
+books_five_notcomple <- books_five_notcomple %>% arrange(Title, value)
+books_five_notcomple$variable <- factor(books_five_notcomple$variable,
+                                        levels = c("Genre", "Genre2",
+                                                   "Genre3", "Genre4"))
+levels(books_five_notcomple$variable)[1] <- "Genre1"
+j <- 1
+for(i in 1 : (dim(books_five_notcomple)[1] - 1)){
+  if(books_five_notcomple$Title[i] == books_five_notcomple$Title[i + 1]){
+    j <- j + 1
+  } else{
+    j <- 1
+  }
+  books_five_notcomple$variable[i + 1] <- paste0("Genre", j)
+}
+books_five_notcomple <- dcast(books_five_notcomple,
+                              Title + Writer ~ variable)
+books_five_notcomple[is.na(books_five_notcomple)] <- "X"
+books_five_notcomple$Genre4 <- NULL
+
+books_five_comple$n <- NULL
+colnames(books_five_comple)[3] <- "Genre1"
+books_five_comple$Genre2 <- "X"
+books_five_comple$Genre3 <- "X"
+books_five_comple <- rbind(books_five_comple, books_five_notcomple)
+books_five$Genre <- NULL
+books_five <- merge(books_five, books_five_comple, by = c("Title", "Writer"), all.x = T)
+# (3) Group
+books_five <- books_five %>% group_by(Title, Writer, Novel, Genre1, Genre2, Genre3) %>% 
+  summarise(Score = median(Score), Reviewcount = round(mean(Reviewcount)))
+books_five <- as.data.frame(books_five)
+books_data <- read.csv("Books_Information_ottf.csv")
+books_data <- rbind(books_data, books_five)
+write.csv(books_data, "Books_Information_ottff.csv", row.names = F)
+write.csv(books, "Books_Information_theotherdata.csv", row.names = F)
+
+# 5. n == 6
+rm(list = ls()); gc(reset = T)
+books <- read.csv("Books_Information_theotherdata.csv")
+books_six <- books %>% filter(n == 6)
+books_theothers <- books %>% filter(n != 6)
+# (1) Novel
+books_six$n <- NULL
+books_six$Novel <- as.character(books_six$Novel)
+books_six$Novel <- ifelse(books_six$Writer 
+                          %in% c("로버트 루이스 스티븐슨", "엘러리 퀸",
+                                 "애거사 크리스티", "제임스 조이스",
+                                 "아서 코난 도일", "L. 프랭크 바움"), 
+                          "영미소설", books_six$Novel)
+books_index <- which(books_six$Novel == "기타 국가의 소설")
+books_six[books_index, "Novel"] <- books_six[books_index - 1, "Novel"]
+# (2) Genre
+books_six_genre_group <- books_six %>% group_by(Title, Writer, Genre) %>% 
+  summarise(n = n())
+books_six_genre_comple <- books_six_genre_group %>% filter(n == 6)
+books_six_genre_notcomple <- books_six_genre_group %>% filter(n != 6)
+books_six_genre_notcomple <- as.data.frame(books_six_genre_notcomple)
+books_six_genre_notcomple$Genre <- as.character(books_six_genre_notcomple$Genre)
+books_six_genre_notcomple$Genre <- ifelse(books_six_genre_notcomple$Genre == "X",
+                                          NA, books_six_genre_notcomple$Genre)
+books_six_genre_notcomple <- books_six_genre_notcomple %>% arrange(Title, Genre)
+books_six_genre_notcomple$n <- NULL
+books_six_genre_notcomple <- melt(books_six_genre_notcomple,
+                                  id.vars = c(1, 2))
+books_six_genre_notcomple$variable <- factor(books_six_genre_notcomple$variable,
+                                        levels = c("Genre", "Genre2",
+                                                   "Genre3"))
+levels(books_six_genre_notcomple$variable)[1] <- "Genre1"
+j <- 1
+for(i in 1 : (dim(books_six_genre_notcomple)[1] - 1)){
+  if(books_six_genre_notcomple$Title[i] == books_six_genre_notcomple$Title[i + 1]){
+    j <- j + 1
+  } else{
+    j <- 1
+  }
+  books_six_genre_notcomple$variable[i + 1] <- paste0("Genre", j)
+}
+books_six_genre_notcomple <- dcast(books_six_genre_notcomple,
+                                   Title + Writer ~ variable)
+books_six_genre_notcomple[is.na(books_six_genre_notcomple)] <- "X"
+books_six_genre_comple$n <- NULL
+colnames(books_six_genre_comple)[3] <- "Genre1"
+books_six_genre_comple$Genre2 <- "X"
+books_six_genre_comple$Genre3 <- "X"
+books_six_genre_comple <- as.data.frame(books_six_genre_comple)
+books_six_genre_comple <- rbind(books_six_genre_comple, books_six_genre_notcomple)
+books_six$Genre <- NULL
+books_six <- merge(books_six, books_six_genre_comple, by = c("Title", "Writer"),
+                   all.x = T)
+# (3) Group
+books_six <- books_six %>% group_by(Title, Writer, Novel, Genre1, Genre2, Genre3) %>% 
+  summarise(Score = median(Score), Reviewcount = round(mean(Reviewcount)))
+books_six <- as.data.frame(books_six)
+books_data <- read.csv("Books_Information_ottff.csv")
+books_data <- rbind(books_data, books_six)
+write.csv(books_data, "Books_Information_otosix.csv", row.names = F)
+write.csv(books_theothers, "Books_Information_theotherdata.csv", row.names = F)
