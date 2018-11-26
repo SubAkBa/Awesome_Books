@@ -5,6 +5,8 @@ install.packages("arules", dependencies = TRUE)
 install.packages("arulesViz", dependencies = TRUE)
 install.packages("RODBC")
 install.packages("RMySQL")
+install.packages("devtools")
+install_github("Kohze/fireData")
 library(reshape2)
 library(Hmisc)
 library(dplyr)
@@ -16,6 +18,8 @@ library(arulesViz)
 library(recommenderlab)
 library(RODBC)
 library(RMySQL)
+library(devtools)
+library(fireData)
 
 rm(list = ls()); gc(reset = T)
 books <- read.csv("Books_Information.csv")
@@ -652,3 +656,48 @@ books_data <- read.csv("Books_Information_ottff.csv")
 books_data <- rbind(books_data, books_six)
 write.csv(books_data, "Books_Information_otosix.csv", row.names = F)
 write.csv(books_theothers, "Books_Information_theotherdata.csv", row.names = F)
+
+# Connect to Firebase ... Hold
+books <- read.csv("Books_Information_otosix.csv")
+token <- anonymous_login("AIzaSyALC7J5BpJemVns3OE4hc81DgN65eHRMLU")
+authes <- auth(projectAPI = "AIzaSyALC7J5BpJemVns3OE4hc81DgN65eHRMLU", 
+               email = "yhmsje9207@gmail.com", password = "")
+upload(books, projectURL = project_url, directory = "awesomebooks-ac67e")
+put(books, projectURL = project_url, directory = "awesomebooks-ac67e")
+email_str <- "yhmsje9207@gmail.com"
+api_key_str <- "AIzaSyALC7J5BpJemVns3OE4hc81DgN65eHRMLU"
+project_id_str <- "awesomebooks-ac67e"
+project_url <- "https://awesomebooks-ac67e.firebaseio.com/"
+
+# Create example User Data & User PreferBooksData
+write.csv(books, "Books_Information_final.csv")
+books <- read.csv("Books_Information_final.csv")
+colnames(books)[1] <- "Id"
+write.csv(books, "Books_Information_final.csv", row.names = F)
+books <- read.csv("Books_Information_final.csv")
+user_data <- data.frame(user_email = c("1@gmail.com", "2@gmail.com", "3@gmail.com",
+                                       "4@gmail.com", "5@gmail.com", "6@gmail.com",
+                                       "7@gmail.com", "8@gmail.com", "9@gmail.com",
+                                       "10@gmail.com"),
+                        user_pwd = c("1234", "1234", "1234", "1234", "1234", "1234",
+                                     "1234", "1234", "1234", "1234"),
+                        user_nickname = c("a", "b", "c", "d", "e", "f", "g", "h",
+                                          "i", "j"),
+                        user_priority = c("장르", "소설", "작가", "장르", "소설", "작가",
+                                          "장르", "소설", "작가", "장르"))
+write.csv(user_data, "Users_Information.csv", row.names = F)
+index1 <- sampleBy(~ Novel, frac = .0005, data = books) %>% select(Id)
+index2 <- sampleBy(~ Genre1, frac = .0004, data = books) %>% select(Id)
+index3 <- sampleBy(~ Genre2, frac = .0004, data = books) %>% select(Id)
+random_index <- unlist(c(index1, index2, index3))
+names(random_index) <- NULL
+user_prefer_book <- data.frame(user_email = c("1@gmail.com", "2@gmail.com", "3@gmail.com",
+                                              "4@gmail.com", "5@gmail.com", "6@gmail.com",
+                                              "7@gmail.com", "8@gmail.com", "9@gmail.com",
+                                              "10@gmail.com"),
+                               book1 = c(random_index[seq(1, 30, 3)]),
+                               book2 = c(random_index[seq(2, 30, 3)]),
+                               book3 = c(random_index[seq(3, 30, 3)]))
+write.csv(user_prefer_book, "Users_Prefer_Information.csv", row.names = F)
+
+# Recommend books using Users_Prefer_Information data & Books_Information_final
