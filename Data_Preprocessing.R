@@ -6,6 +6,7 @@ install.packages("arulesViz", dependencies = TRUE)
 install.packages("RODBC")
 install.packages("RMySQL")
 install.packages("devtools")
+install.packages("plyr")
 install_github("Kohze/fireData")
 library(reshape2)
 library(Hmisc)
@@ -19,6 +20,7 @@ library(recommenderlab)
 library(RODBC)
 library(RMySQL)
 library(devtools)
+library(plyr)
 library(fireData)
 
 rm(list = ls()); gc(reset = T)
@@ -701,3 +703,73 @@ user_prefer_book <- data.frame(user_email = c("1@gmail.com", "2@gmail.com", "3@g
 write.csv(user_prefer_book, "Users_Prefer_Information.csv", row.names = F)
 
 # Recommend books using Users_Prefer_Information data & Books_Information_final
+books <- read.csv("Books_Information_final.csv")
+users <- read.csv("Users_Information.csv", stringsAsFactors = F)
+user_prefer <- read.csv("Users_Prefer_Information.csv", stringsAsFactors = F)
+analysisbook <- data.frame(user_email = users$user_email,
+                           book1 = NA, book2 = NA, book3 = NA, book4 = NA,
+                           book5 = NA, stringsAsFactors = F)
+# X -> NA
+books[books == "X"] <- NA
+books[books == "x"] <- NA
+write.csv(books, "Books_Information_final.csv", row.names = F)
+
+for(i in 1 : 10){
+  analysisbook[i, c(2 : 6)] <- 
+    ItemCollaborFiltering(users[i, "user_priority"], books, 
+                          c(user_prefer[i, 2], user_prefer[i, 3], user_prefer[i, 4]))
+}
+
+# ItemCollaborationFiltering Function
+ItemCollaborFiltering <- function(users_priority, booksinfo, user_prefers){
+  columnindex <- ifelse(users_priority == "장르", 1,
+                        ifelse(users_priority == "소설", 2, 3))
+  columnname <- c("Genre", "Novel", "Writer")
+  if(columnindex == 1){
+    categories <- data.frame(cate1 = NA, cate2 = NA, cate3 = NA, 
+                             cate4 = NA, cate5 = NA, cate6 = NA,
+                             cate7 = NA, cate8 = NA, cate9 = NA)
+
+    for(j in 1 : dim(categories)[2]){
+      categories[j] <- booksinfo[user_prefers[((j * 3) %/% 10) + 1], 
+                                 paste0(columnname[columnindex], ifelse(j %% 3 == 0, 
+                                                                        3, j %% 3))]
+    }
+  } else{
+    categories <- data.frame(cate1 = NA, cate2 = NA, cate3 = NA)
+    
+    for(j in 1 : dim(categories)[2]){
+      categories[j] <- booksinfo[user_prefers[j], 
+                                 columnname[columnindex]]
+    }
+  }
+  
+  
+  allcategory <- categories %>% melt(id.vars = NULL) %>% 
+    group_by(value) %>% dplyr::summarise(n = n()) %>% # dplyr & plyr conflict
+    arrange(desc(n), value) %>% as.data.frame()
+
+  if(columnindex == 1){
+    analysisdata <- data.frame()
+    for(p in 1 : 3){
+      analysisdata <- 
+        rbind(analysisdata, 
+              (ddply(booksinfo, paste0(columnname[columnindex], p), function(sub){
+                sub %>% arrange(desc(Score), desc(Reviewcount)) %>% head(2) %>% 
+                  filter(!!as.name(paste0(columnname[columnindex], p)) 
+                         %in% allcategory$value)
+                })) %>% select(Title))
+      analysisdata <- unique(analysisdata)
+    }
+  } else{
+    analysisdata <- 
+      (ddply(booksinfo, columnname[columnindex], function(sub){
+        sub %>% arrange(desc(Score), desc(Reviewcount)) %>% head(2)
+        }) %>% filter(!!as.name(columnname[columnindex])
+                      %in% allcategory$value) %>% select(Title))[[1]][1 : 5]
+  }
+  return(as.character(analysisdata))
+}
+
+# UserCollaborationFiltering Function
+bought <- read.csv("Book_Bought_Information.csv")
