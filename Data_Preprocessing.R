@@ -308,36 +308,12 @@ for(i in 1 : nrow(melt_book1)){
   genreindex <- ifelse()
 }
 
-
 # RMySQL
 con <- dbConnect(MySQL(), username = "root",
                 password = "1234", host = "localhost",
                 port = 3306, dbname = "R")
 dbListTables(con)
 dbGetQuery(con, "select user_email, user_priority from usertbl")
-
-
-# 고객 데이터 만들기 / 유사도 측정
-books <- read.csv("Books_Information_maybefinal.csv")
-Title <- read.csv("Title.csv")
-writer <- read.csv("Writer.csv")
-series <- read.csv("Series.csv")
-customer <- data.frame(num = 1 : 15, 
-                       custid = c("c1", "c1", "c2", "c2", "c3", 
-                                  "c4", "c3", "c5", "c5", "c5",
-                                  "c6", "c4", "c1", "c3", "c6"),
-                       book = c(blist1[1 : 3, 1], blist1[2, 1], blist1[1, 1],
-                                tlist1[2 : 4, 1], tlist1[5, 1], tlist1[2 : 3, 1],
-                                tlist1[1, 1], blist1[2 : 3, 1], blist1[1, 1]))
-customer_lists <- split(customer$book, customer$custid)
-customer_tran <- as(customer_lists, "transactions")
-summary(customer_tran)
-itemFrequency(customer_tran)
-itemFrequencyPlot(customer_tran, support = 0.1)
-itemFrequencyPlot(customer_tran, topN = 5)
-customer_rule <- apriori(customer_tran)
-summary(customer_rule)
-inspect(customer_rule)
 
 # Because of wrong novel and genre data, start again from the beginning
 rm(list = ls()); gc(reset = T)
@@ -720,7 +696,7 @@ for(i in 1 : 10){
                           c(user_prefer[i, 2], user_prefer[i, 3], user_prefer[i, 4]))
 }
 
-# ItemCollaborationFiltering Function
+# ItemCollaborativeFiltering Function
 ItemCollaborFiltering <- function(users_priority, booksinfo, user_prefers){
   columnindex <- ifelse(users_priority == "장르", 1,
                         ifelse(users_priority == "소설", 2, 3))
@@ -771,5 +747,37 @@ ItemCollaborFiltering <- function(users_priority, booksinfo, user_prefers){
   return(as.character(analysisdata))
 }
 
-# UserCollaborationFiltering Function
-bought <- read.csv("Book_Bought_Information.csv")
+# UserCollaborativeFiltering using library recommenderlab
+books <- read.csv("Books_Information_final.csv")
+index <- sample(nrow(books), 20000, replace = T)
+bought <- books[index, ] %>% select(Id, Title)
+bought$user_email <- paste0(rep(1 : 2000, each = 10), "@naver.com")
+bought <- bought[, c(3, 1, 2)]
+rownames(bought) <- NULL
+write.csv(bought, "Book_Bought_Information.csv", row.names = F)
+
+realmat <- as(bought, "realRatingMatrix")
+train_index <- sample(2000, 1400)
+train_bought <- realmat[train_index]
+train_bought <- train_bought[rowCounts(train_bought) >= 3]
+# split, cross
+# given = recommend item count, k = repeat simulation count
+schema_bought <- evaluationScheme(train_bought, method = "split", train = .8,
+                                  given = 5, goodRating = 4, k = 3)
+UBCF_bought <- Recommender(train_bought, method = "UBCF", parameter = "Cosine")
+test_bought <- realmat[-train_index, ]
+
+UBCF_recommend_list <- predict(UBCF_bought, test_bought, n = 5)
+View(as(UBCF_recommend_list, "list"))
+
+# Pattern rule
+split_bought <- split(bought$Id, bought$user_email)
+transaction_bought <- as(split_bought, "transactions")
+summary(transaction_bought)
+itemFrequency(transaction_bought)
+itemFrequencyPlot(transaction_bought, support = 0.001)
+itemFrequencyPlot(transaction_bought, topN = 5)
+rule_bought <- apriori(transaction_bought, 
+                       parameter = list(support = 0.0005, 
+                                        confidence = 0.002, minlen = 2))
+inspect(rule_bought)
