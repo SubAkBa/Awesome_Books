@@ -519,14 +519,5 @@ library(RMySQL)
 *세트 데이터는 단일품만으로도 충분히 추천시스템을 구현할 수 있고 무엇보다 데이터가 지저분하다고 판단되어 제거하기로 결정했다.*
 
 ``` r
-nrow(book_info)
-```
-
-    ## [1] 30563
-
-``` r
 book_info <- book_info %>% filter(!is.na(Pagenum) & !is.na(Publisher))
-nrow(book_info)
 ```
-
-    ## [1] 30280

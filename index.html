@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="data:text/css;charset=utf-8,%0A%40font%2Dface%20%7B%0Afont%2Dfamily%3A%20octicons%2Dlink%3B%0Asrc%3A%20url%28data%3Afont%2Fwoff%3Bcharset%3Dutf%2D8%3Bbase64%2Cd09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM%2B8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB%2FaFGpk3jaTY6xa8JAGMW%2FO62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v%2Bk%2F0an2i%2BitHDw3v2%2B9%2BDBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3%2FI7AtxEJLtzzuZfI%2BVVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy%2FLt7Kc%2B0vWY%2FgAgIIEqAN9we0pwKXreiMasxvabDQMM4riO%2BqxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw%2Bymhce7vwM9jSqO8JyVd5RH9gyTt2%2BJ%2FyUmYlIR0s04n6%2B7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv%2FocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi%2BW2%2BMjCzMIDApSwvXzC97Z4Ig8N%2FBxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh%2F8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT%2BAEjAwuDFpBmA9KMDEwMCh9i%2Fv8H8sH0%2F4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9%2FlqYwOGZxeUelN2U2R6%2BcArgtCJpauW7UQBqnFkUsjAY%2FkOU1cP%2BDAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl%2BvvmM%2FbyA48e6tWrKArm4ZJlCbdsrxksL1AwWn%2FyBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO%2F%2FsdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd%2F89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF%2B9JOS0nbaaYDCQfwCJ7Au3AHj%2BLO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm%2BEBXuAbHmIMSRMs%2B4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL%2BhD7C1xoaHeLJSEao0FEW14ckxC%2BTU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13%2F%2Blm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl%2B9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O%2FAdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB%2F%2F%2FAA8AAQAAAAAAAAAAAAAAAAABAAAAAA%3D%3D%29%20format%28%27woff%27%29%3B%0A%7D%0Abody%20%7B%0A%2Dwebkit%2Dtext%2Dsize%2Dadjust%3A%20100%25%3B%0Atext%2Dsize%2Dadjust%3A%20100%25%3B%0Acolor%3A%20%23333%3B%0Afont%2Dfamily%3A%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20%22Segoe%20UI%22%2C%20Arial%2C%20freesans%2C%20sans%2Dserif%2C%20%22Apple%20Color%20Emoji%22%2C%20%22Segoe%20UI%20Emoji%22%2C%20%22Segoe%20UI%20Symbol%22%3B%0Afont%2Dsize%3A%2016px%3B%0Aline%2Dheight%3A%201%2E6%3B%0Aword%2Dwrap%3A%20break%2Dword%3B%0A%7D%0Aa%20%7B%0Abackground%2Dcolor%3A%20transparent%3B%0A%7D%0Aa%3Aactive%2C%0Aa%3Ahover%20%7B%0Aoutline%3A%200%3B%0A%7D%0Astrong%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%202em%3B%0Amargin%3A%200%2E67em%200%3B%0A%7D%0Aimg%20%7B%0Aborder%3A%200%3B%0A%7D%0Ahr%20%7B%0Abox%2Dsizing%3A%20content%2Dbox%3B%0Aheight%3A%200%3B%0A%7D%0Apre%20%7B%0Aoverflow%3A%20auto%3B%0A%7D%0Acode%2C%0Akbd%2C%0Apre%20%7B%0Afont%2Dfamily%3A%20monospace%2C%20monospace%3B%0Afont%2Dsize%3A%201em%3B%0A%7D%0Ainput%20%7B%0Acolor%3A%20inherit%3B%0Afont%3A%20inherit%3B%0Amargin%3A%200%3B%0A%7D%0Ahtml%20input%5Bdisabled%5D%20%7B%0Acursor%3A%20default%3B%0A%7D%0Ainput%20%7B%0Aline%2Dheight%3A%20normal%3B%0A%7D%0Ainput%5Btype%3D%22checkbox%22%5D%20%7B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0Apadding%3A%200%3B%0A%7D%0Atable%20%7B%0Aborder%2Dcollapse%3A%20collapse%3B%0Aborder%2Dspacing%3A%200%3B%0A%7D%0Atd%2C%0Ath%20%7B%0Apadding%3A%200%3B%0A%7D%0A%2A%20%7B%0Abox%2Dsizing%3A%20border%2Dbox%3B%0A%7D%0Ainput%20%7B%0Afont%3A%2013px%20%2F%201%2E4%20Helvetica%2C%20arial%2C%20nimbussansl%2C%20liberationsans%2C%20freesans%2C%20clean%2C%20sans%2Dserif%2C%20%22Apple%20Color%20Emoji%22%2C%20%22Segoe%20UI%20Emoji%22%2C%20%22Segoe%20UI%20Symbol%22%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%234078c0%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%2C%0Aa%3Aactive%20%7B%0Atext%2Ddecoration%3A%20underline%3B%0A%7D%0Ahr%20%7B%0Aheight%3A%200%3B%0Amargin%3A%2015px%200%3B%0Aoverflow%3A%20hidden%3B%0Abackground%3A%20transparent%3B%0Aborder%3A%200%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23ddd%3B%0A%7D%0Ahr%3Abefore%20%7B%0Adisplay%3A%20table%3B%0Acontent%3A%20%22%22%3B%0A%7D%0Ahr%3Aafter%20%7B%0Adisplay%3A%20table%3B%0Aclear%3A%20both%3B%0Acontent%3A%20%22%22%3B%0A%7D%0Ah1%2C%0Ah2%2C%0Ah3%2C%0Ah4%2C%0Ah5%2C%0Ah6%20%7B%0Amargin%2Dtop%3A%2015px%3B%0Amargin%2Dbottom%3A%2015px%3B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ah1%20%7B%0Afont%2Dsize%3A%2030px%3B%0A%7D%0Ah2%20%7B%0Afont%2Dsize%3A%2021px%3B%0A%7D%0Ah3%20%7B%0Afont%2Dsize%3A%2016px%3B%0A%7D%0Ah4%20%7B%0Afont%2Dsize%3A%2014px%3B%0A%7D%0Ah5%20%7B%0Afont%2Dsize%3A%2012px%3B%0A%7D%0Ah6%20%7B%0Afont%2Dsize%3A%2011px%3B%0A%7D%0Ablockquote%20%7B%0Amargin%3A%200%3B%0A%7D%0Aul%2C%0Aol%20%7B%0Apadding%3A%200%3B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Aol%20ol%2C%0Aul%20ol%20%7B%0Alist%2Dstyle%2Dtype%3A%20lower%2Droman%3B%0A%7D%0Aul%20ul%20ol%2C%0Aul%20ol%20ol%2C%0Aol%20ul%20ol%2C%0Aol%20ol%20ol%20%7B%0Alist%2Dstyle%2Dtype%3A%20lower%2Dalpha%3B%0A%7D%0Add%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Afont%2Dsize%3A%2012px%3B%0A%7D%0Apre%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0Afont%3A%2012px%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0A%7D%0A%2Eselect%3A%3A%2Dms%2Dexpand%20%7B%0Aopacity%3A%200%3B%0A%7D%0A%2Eocticon%20%7B%0Afont%3A%20normal%20normal%20normal%2016px%2F1%20octicons%2Dlink%3B%0Adisplay%3A%20inline%2Dblock%3B%0Atext%2Ddecoration%3A%20none%3B%0Atext%2Drendering%3A%20auto%3B%0A%2Dwebkit%2Dfont%2Dsmoothing%3A%20antialiased%3B%0A%2Dmoz%2Dosx%2Dfont%2Dsmoothing%3A%20grayscale%3B%0A%2Dwebkit%2Duser%2Dselect%3A%20none%3B%0A%2Dmoz%2Duser%2Dselect%3A%20none%3B%0A%2Dms%2Duser%2Dselect%3A%20none%3B%0Auser%2Dselect%3A%20none%3B%0A%7D%0A%2Eocticon%2Dlink%3Abefore%20%7B%0Acontent%3A%20%27%5Cf05c%27%3B%0A%7D%0A%2Emarkdown%2Dbody%3Abefore%20%7B%0Adisplay%3A%20table%3B%0Acontent%3A%20%22%22%3B%0A%7D%0A%2Emarkdown%2Dbody%3Aafter%20%7B%0Adisplay%3A%20table%3B%0Aclear%3A%20both%3B%0Acontent%3A%20%22%22%3B%0A%7D%0A%2Emarkdown%2Dbody%3E%2A%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%20%21important%3B%0A%7D%0A%2Emarkdown%2Dbody%3E%2A%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%20%21important%3B%0A%7D%0Aa%3Anot%28%5Bhref%5D%29%20%7B%0Acolor%3A%20inherit%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0A%2Eanchor%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%2Dright%3A%202px%3B%0Amargin%2Dleft%3A%20%2D18px%3B%0A%7D%0A%2Eanchor%3Afocus%20%7B%0Aoutline%3A%20none%3B%0A%7D%0Ah1%2C%0Ah2%2C%0Ah3%2C%0Ah4%2C%0Ah5%2C%0Ah6%20%7B%0Amargin%2Dtop%3A%201em%3B%0Amargin%2Dbottom%3A%2016px%3B%0Afont%2Dweight%3A%20bold%3B%0Aline%2Dheight%3A%201%2E4%3B%0A%7D%0Ah1%20%2Eocticon%2Dlink%2C%0Ah2%20%2Eocticon%2Dlink%2C%0Ah3%20%2Eocticon%2Dlink%2C%0Ah4%20%2Eocticon%2Dlink%2C%0Ah5%20%2Eocticon%2Dlink%2C%0Ah6%20%2Eocticon%2Dlink%20%7B%0Acolor%3A%20%23000%3B%0Avertical%2Dalign%3A%20middle%3B%0Avisibility%3A%20hidden%3B%0A%7D%0Ah1%3Ahover%20%2Eanchor%2C%0Ah2%3Ahover%20%2Eanchor%2C%0Ah3%3Ahover%20%2Eanchor%2C%0Ah4%3Ahover%20%2Eanchor%2C%0Ah5%3Ahover%20%2Eanchor%2C%0Ah6%3Ahover%20%2Eanchor%20%7B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Ah1%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah2%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah3%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah4%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah5%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%2C%0Ah6%3Ahover%20%2Eanchor%20%2Eocticon%2Dlink%20%7B%0Avisibility%3A%20visible%3B%0A%7D%0Ah1%20%7B%0Apadding%2Dbottom%3A%200%2E3em%3B%0Afont%2Dsize%3A%202%2E25em%3B%0Aline%2Dheight%3A%201%2E2%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23eee%3B%0A%7D%0Ah1%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%3B%0A%7D%0Ah2%20%7B%0Apadding%2Dbottom%3A%200%2E3em%3B%0Afont%2Dsize%3A%201%2E75em%3B%0Aline%2Dheight%3A%201%2E225%3B%0Aborder%2Dbottom%3A%201px%20solid%20%23eee%3B%0A%7D%0Ah2%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%3B%0A%7D%0Ah3%20%7B%0Afont%2Dsize%3A%201%2E5em%3B%0Aline%2Dheight%3A%201%2E43%3B%0A%7D%0Ah3%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E2%3B%0A%7D%0Ah4%20%7B%0Afont%2Dsize%3A%201%2E25em%3B%0A%7D%0Ah4%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E2%3B%0A%7D%0Ah5%20%7B%0Afont%2Dsize%3A%201em%3B%0A%7D%0Ah5%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ah6%20%7B%0Afont%2Dsize%3A%201em%3B%0Acolor%3A%20%23777%3B%0A%7D%0Ah6%20%2Eanchor%20%7B%0Aline%2Dheight%3A%201%2E1%3B%0A%7D%0Ap%2C%0Ablockquote%2C%0Aul%2C%0Aol%2C%0Adl%2C%0Atable%2C%0Apre%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0Ahr%20%7B%0Aheight%3A%204px%3B%0Apadding%3A%200%3B%0Amargin%3A%2016px%200%3B%0Abackground%2Dcolor%3A%20%23e7e7e7%3B%0Aborder%3A%200%20none%3B%0A%7D%0Aul%2C%0Aol%20%7B%0Apadding%2Dleft%3A%202em%3B%0A%7D%0Aul%20ul%2C%0Aul%20ol%2C%0Aol%20ol%2C%0Aol%20ul%20%7B%0Amargin%2Dtop%3A%200%3B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Ali%3Ep%20%7B%0Amargin%2Dtop%3A%2016px%3B%0A%7D%0Adl%20%7B%0Apadding%3A%200%3B%0A%7D%0Adl%20dt%20%7B%0Apadding%3A%200%3B%0Amargin%2Dtop%3A%2016px%3B%0Afont%2Dsize%3A%201em%3B%0Afont%2Dstyle%3A%20italic%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Adl%20dd%20%7B%0Apadding%3A%200%2016px%3B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0Ablockquote%20%7B%0Apadding%3A%200%2015px%3B%0Acolor%3A%20%23777%3B%0Aborder%2Dleft%3A%204px%20solid%20%23ddd%3B%0A%7D%0Ablockquote%3E%3Afirst%2Dchild%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Ablockquote%3E%3Alast%2Dchild%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Atable%20%7B%0Adisplay%3A%20block%3B%0Awidth%3A%20100%25%3B%0Aoverflow%3A%20auto%3B%0Aword%2Dbreak%3A%20normal%3B%0Aword%2Dbreak%3A%20keep%2Dall%3B%0A%7D%0Atable%20th%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Atable%20th%2C%0Atable%20td%20%7B%0Apadding%3A%206px%2013px%3B%0Aborder%3A%201px%20solid%20%23ddd%3B%0A%7D%0Atable%20tr%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Aborder%2Dtop%3A%201px%20solid%20%23ccc%3B%0A%7D%0Atable%20tr%3Anth%2Dchild%282n%29%20%7B%0Abackground%2Dcolor%3A%20%23f8f8f8%3B%0A%7D%0Aimg%20%7B%0Amax%2Dwidth%3A%20100%25%3B%0Abox%2Dsizing%3A%20content%2Dbox%3B%0Abackground%2Dcolor%3A%20%23fff%3B%0A%7D%0Acode%20%7B%0Apadding%3A%200%3B%0Apadding%2Dtop%3A%200%2E2em%3B%0Apadding%2Dbottom%3A%200%2E2em%3B%0Amargin%3A%200%3B%0Afont%2Dsize%3A%2085%25%3B%0Abackground%2Dcolor%3A%20rgba%280%2C0%2C0%2C0%2E04%29%3B%0Aborder%2Dradius%3A%203px%3B%0A%7D%0Acode%3Abefore%2C%0Acode%3Aafter%20%7B%0Aletter%2Dspacing%3A%20%2D0%2E2em%3B%0Acontent%3A%20%22%5C00a0%22%3B%0A%7D%0Apre%3Ecode%20%7B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0Afont%2Dsize%3A%20100%25%3B%0Aword%2Dbreak%3A%20normal%3B%0Awhite%2Dspace%3A%20pre%3B%0Abackground%3A%20transparent%3B%0Aborder%3A%200%3B%0A%7D%0A%2Ehighlight%20%7B%0Amargin%2Dbottom%3A%2016px%3B%0A%7D%0A%2Ehighlight%20pre%2C%0Apre%20%7B%0Apadding%3A%2016px%3B%0Aoverflow%3A%20auto%3B%0Afont%2Dsize%3A%2085%25%3B%0Aline%2Dheight%3A%201%2E45%3B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0A%7D%0A%2Ehighlight%20pre%20%7B%0Amargin%2Dbottom%3A%200%3B%0Aword%2Dbreak%3A%20normal%3B%0A%7D%0Apre%20%7B%0Aword%2Dwrap%3A%20normal%3B%0A%7D%0Apre%20code%20%7B%0Adisplay%3A%20inline%3B%0Amax%2Dwidth%3A%20initial%3B%0Apadding%3A%200%3B%0Amargin%3A%200%3B%0Aoverflow%3A%20initial%3B%0Aline%2Dheight%3A%20inherit%3B%0Aword%2Dwrap%3A%20normal%3B%0Abackground%2Dcolor%3A%20transparent%3B%0Aborder%3A%200%3B%0A%7D%0Apre%20code%3Abefore%2C%0Apre%20code%3Aafter%20%7B%0Acontent%3A%20normal%3B%0A%7D%0Akbd%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%3A%203px%205px%3B%0Afont%2Dsize%3A%2011px%3B%0Aline%2Dheight%3A%2010px%3B%0Acolor%3A%20%23555%3B%0Avertical%2Dalign%3A%20middle%3B%0Abackground%2Dcolor%3A%20%23fcfcfc%3B%0Aborder%3A%20solid%201px%20%23ccc%3B%0Aborder%2Dbottom%2Dcolor%3A%20%23bbb%3B%0Aborder%2Dradius%3A%203px%3B%0Abox%2Dshadow%3A%20inset%200%20%2D1px%200%20%23bbb%3B%0A%7D%0A%2Epl%2Dc%20%7B%0Acolor%3A%20%23969896%3B%0A%7D%0A%2Epl%2Dc1%2C%0A%2Epl%2Ds%20%2Epl%2Dv%20%7B%0Acolor%3A%20%230086b3%3B%0A%7D%0A%2Epl%2De%2C%0A%2Epl%2Den%20%7B%0Acolor%3A%20%23795da3%3B%0A%7D%0A%2Epl%2Ds%20%2Epl%2Ds1%2C%0A%2Epl%2Dsmi%20%7B%0Acolor%3A%20%23333%3B%0A%7D%0A%2Epl%2Dent%20%7B%0Acolor%3A%20%2363a35c%3B%0A%7D%0A%2Epl%2Dk%20%7B%0Acolor%3A%20%23a71d5d%3B%0A%7D%0A%2Epl%2Dpds%2C%0A%2Epl%2Ds%2C%0A%2Epl%2Ds%20%2Epl%2Dpse%20%2Epl%2Ds1%2C%0A%2Epl%2Dsr%2C%0A%2Epl%2Dsr%20%2Epl%2Dcce%2C%0A%2Epl%2Dsr%20%2Epl%2Dsra%2C%0A%2Epl%2Dsr%20%2Epl%2Dsre%20%7B%0Acolor%3A%20%23183691%3B%0A%7D%0A%2Epl%2Dv%20%7B%0Acolor%3A%20%23ed6a43%3B%0A%7D%0A%2Epl%2Did%20%7B%0Acolor%3A%20%23b52a1d%3B%0A%7D%0A%2Epl%2Dii%20%7B%0Abackground%2Dcolor%3A%20%23b52a1d%3B%0Acolor%3A%20%23f8f8f8%3B%0A%7D%0A%2Epl%2Dsr%20%2Epl%2Dcce%20%7B%0Acolor%3A%20%2363a35c%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dml%20%7B%0Acolor%3A%20%23693a17%3B%0A%7D%0A%2Epl%2Dmh%2C%0A%2Epl%2Dmh%20%2Epl%2Den%2C%0A%2Epl%2Dms%20%7B%0Acolor%3A%20%231d3e81%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmq%20%7B%0Acolor%3A%20%23008080%3B%0A%7D%0A%2Epl%2Dmi%20%7B%0Acolor%3A%20%23333%3B%0Afont%2Dstyle%3A%20italic%3B%0A%7D%0A%2Epl%2Dmb%20%7B%0Acolor%3A%20%23333%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmd%20%7B%0Abackground%2Dcolor%3A%20%23ffecec%3B%0Acolor%3A%20%23bd2c00%3B%0A%7D%0A%2Epl%2Dmi1%20%7B%0Abackground%2Dcolor%3A%20%23eaffea%3B%0Acolor%3A%20%2355a532%3B%0A%7D%0A%2Epl%2Dmdr%20%7B%0Acolor%3A%20%23795da3%3B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0A%2Epl%2Dmo%20%7B%0Acolor%3A%20%231d3e81%3B%0A%7D%0Akbd%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0Apadding%3A%203px%205px%3B%0Afont%3A%2011px%20Consolas%2C%20%22Liberation%20Mono%22%2C%20Menlo%2C%20Courier%2C%20monospace%3B%0Aline%2Dheight%3A%2010px%3B%0Acolor%3A%20%23555%3B%0Avertical%2Dalign%3A%20middle%3B%0Abackground%2Dcolor%3A%20%23fcfcfc%3B%0Aborder%3A%20solid%201px%20%23ccc%3B%0Aborder%2Dbottom%2Dcolor%3A%20%23bbb%3B%0Aborder%2Dradius%3A%203px%3B%0Abox%2Dshadow%3A%20inset%200%20%2D1px%200%20%23bbb%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%20%7B%0Alist%2Dstyle%2Dtype%3A%20none%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%2B%2Etask%2Dlist%2Ditem%20%7B%0Amargin%2Dtop%3A%203px%3B%0A%7D%0A%2Etask%2Dlist%2Ditem%20input%20%7B%0Amargin%3A%200%200%2E35em%200%2E25em%20%2D1%2E6em%3B%0Avertical%2Dalign%3A%20middle%3B%0A%7D%0A%3Achecked%2B%2Eradio%2Dlabel%20%7B%0Az%2Dindex%3A%201%3B%0Aposition%3A%20relative%3B%0Aborder%2Dcolor%3A%20%234078c0%3B%0A%7D%0A%2EsourceLine%20%7B%0Adisplay%3A%20inline%2Dblock%3B%0A%7D%0Acode%20%2Ekw%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Edt%20%7B%20color%3A%20%23ed6a43%3B%20%7D%0Acode%20%2Edv%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Ebn%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Efl%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Ech%20%7B%20color%3A%20%23009999%3B%20%7D%0Acode%20%2Est%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Eco%20%7B%20color%3A%20%23969896%3B%20%7D%0Acode%20%2Eot%20%7B%20color%3A%20%230086b3%3B%20%7D%0Acode%20%2Eal%20%7B%20color%3A%20%23a61717%3B%20%7D%0Acode%20%2Efu%20%7B%20color%3A%20%2363a35c%3B%20%7D%0Acode%20%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%0Acode%20%2Ewa%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Ecn%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Esc%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Evs%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Ess%20%7B%20color%3A%20%23183691%3B%20%7D%0Acode%20%2Eim%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eva%20%7Bcolor%3A%20%23008080%3B%20%7D%0Acode%20%2Ecf%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eop%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Ebu%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Eex%20%7B%20color%3A%20%23000000%3B%20%7D%0Acode%20%2Epp%20%7B%20color%3A%20%23999999%3B%20%7D%0Acode%20%2Eat%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Edo%20%7B%20color%3A%20%23969896%3B%20%7D%0Acode%20%2Ean%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Ecv%20%7B%20color%3A%20%23008080%3B%20%7D%0Acode%20%2Ein%20%7B%20color%3A%20%23008080%3B%20%7D%0A" rel="stylesheet">
+<style>
+body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  padding-top: 0px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1 id="캡스톤-디자인졸업-작품">캡스톤 디자인(졸업 작품)</h1>
+<h1 id="도서-추천-서비스-앱">1. 도서 추천 서비스 앱</h1>
+<hr />
+<h2 id="개요">1.1 개요</h2>
+<p>먼저, 이 프로젝트에서 다른 팀원들은 어플리케이션 설계 및 구현을 담당하였고 본인은 도서를 추천하는 시스템을 맡았다.<br />
+아이템 및 사용자 협업 필터링을 상황에 맞게 적용하여 개인 별로 알맞은 도서들을 추천해주는 서비스를 구현하였다.</p>
+<h2 id="순서">1.2 순서</h2>
+<ul>
+<li>yes24 웹 크롤링을 통한 도서 데이터 모으기</li>
+<li>도서 데이터 전처리</li>
+<li>협업필터링 적용</li>
+<li>파이어베이스, 안드로이드 연동</li>
+</ul>
+<h1 id="yes24-웹-크롤링">2. yes24 웹 크롤링</h1>
+<hr />
+<p>yes24 도서 데이터를 사용한 이유는 url 규칙을 찾기 쉬웠던게 yes24 였다...</p>
+<p>(1) 교보문고 같은 경우 url뒤 파라미터가 보이지 않는 데도 불구하고 페이지 화면은 바껴서 규칙을 찾을 수 없었고,</p>
+<p>(2) 반디앤루니스는 robots.txt 파일을 들여다보면 검색엔진을 제한한다고 써 있어서 하지 못하였다.<br />
+<del>(3) 가장 큰 이유는 아무래도 내 지식이 얕아 url을 읽지 못했기 때문이 아닐까라는 생각</del></p>
+<h2 id="필요한-라이브러리-장착">2.1 필요한 라이브러리 장착</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(httr)
+<span class="kw">library</span>(RSelenium)</code></pre></div>
+<h2 id="크롤링을-위한-코드-구현">2.2 크롤링을 위한 코드 구현</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">driver &lt;-<span class="st"> </span><span class="kw">rsDriver</span>()
+chrome &lt;-<span class="st"> </span>driver[[<span class="st">&quot;client&quot;</span>]]
+
+book_info &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
+save_info &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;Books_Information.csv&quot;</span>)
+book_info &lt;-<span class="st"> </span><span class="kw">rbind</span>(save_info, book_info)
+
+main_url &lt;-<span class="st"> &quot;http://www.yes24.com&quot;</span>
+pagenumber &lt;-<span class="st"> &quot;?PageNumber=&quot;</span>
+
+genre_url &lt;-<span class="st"> &quot;/24/Category/Display/001001017005&quot;</span>
+novel_url &lt;-<span class="st"> &quot;/24/Category/Display/001001017001&quot;</span>
+
+cate_url &lt;-<span class="st"> </span><span class="kw">c</span>(genre_url, novel_url)</code></pre></div>
+<p>book_info &lt;- rbind(save_info, book_info)가 있는 이유?<br />
+<em>:크롤링할 데이터가 많아 중간중간 끊어 저장하고 다시 크롤링 했기 때문에 묶어주기 위해 삽입했다.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ChangeNAFunc &lt;-<span class="st"> </span><span class="cf">function</span>(text, num){
+  <span class="cf">if</span>(num <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+    result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(text), <span class="st">'X'</span>, text)
+  } <span class="cf">else</span> <span class="cf">if</span>(num <span class="op">==</span><span class="st"> </span><span class="dv">2</span>){
+    result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(text), <span class="dv">0</span>, text)
+  } <span class="cf">else</span> <span class="cf">if</span>(num <span class="op">==</span><span class="st"> </span><span class="dv">3</span>){
+    result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(text), <span class="st">'X'</span>, <span class="st">'O'</span>)
+  } <span class="cf">else</span> <span class="cf">if</span>(num <span class="op">==</span><span class="st"> </span><span class="dv">4</span>){
+    result &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">length</span>(text) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, 
+                     (text <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="st">&quot; | &quot;</span>))[[<span class="dv">1</span>]][<span class="dv">1</span>], 
+                     (text <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="st">&quot; | &quot;</span>))[[<span class="dv">2</span>]][<span class="dv">1</span>])
+  }
+  
+  <span class="kw">return</span> (result)
+}</code></pre></div>
+<p>이 함수는 크롤링을 하면서 결측치가 들어오기 때문에 num에 따라서 결측치를 채워주기 위해 만들었다.</p>
+<p><strong>yes24의 도서 데이터를 크롤링 하는 메인 코드 부분이다.</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Case 1: Genre / Case 2: Novel</span>
+<span class="cf">for</span>(t <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="dv">2</span>){
+  body_url &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="kw">paste0</span>(main_url, cate_url[t])) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">html_nodes</span>(<span class="st">&quot;#cateSubListWrap dt a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>)
+
+  <span class="co"># 장르와 소설 분류를 세부적으로 진입</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(body_url)){
+    chrome<span class="op">$</span><span class="kw">navigate</span>(<span class="kw">paste0</span>(main_url, body_url[i]))
+    list_html &lt;-<span class="st"> </span>chrome<span class="op">$</span><span class="kw">getPageSource</span>()[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">read_html</span>()
+    
+    <span class="cf">if</span>(t <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+      Genre &lt;-<span class="st"> </span>list_html <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//*[@id=&quot;cateSubWrap&quot;]/div[2]/div[1]/h3'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()
+      Novel &lt;-<span class="st"> &quot;X&quot;</span>
+    } <span class="cf">else</span>{
+      Novel &lt;-<span class="st"> </span>list_html <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">html_nodes</span>(<span class="dt">xpath =</span> <span class="st">'//*[@id=&quot;cateSubWrap&quot;]/div[2]/div[1]/h3'</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()
+      Genre &lt;-<span class="st"> &quot;X&quot;</span>
+    }
+    
+    last_page &lt;-<span class="st"> </span>(list_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.yesUI_pagenS a:last-child&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                    </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="st">&quot;=&quot;</span>))[[<span class="dv">1</span>]][<span class="dv">2</span>]
+    
+    <span class="co"># 각 세부 카테고리의 모든 페이지</span>
+    <span class="cf">for</span>(j <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span>last_page){
+      chrome<span class="op">$</span><span class="kw">navigate</span>(<span class="kw">paste0</span>(main_url, body_url[i], pagenumber, j))
+      
+      page_html &lt;-<span class="st"> </span>chrome<span class="op">$</span><span class="kw">getPageSource</span>()[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">read_html</span>()
+      
+      book_exist &lt;-<span class="st"> </span>page_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;.goods_btn&quot;</span>)
+      
+      page_url &lt;-<span class="st"> </span>page_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;.goods_name a&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">html_attr</span>(<span class="st">&quot;href&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>()
+  
+      <span class="co"># 각각의 페이지 내에 있는 책 리스트</span>
+      <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span> <span class="op">:</span><span class="st"> </span><span class="kw">length</span>(page_url)){
+        
+        <span class="cf">if</span>(<span class="op">!</span><span class="kw">is.na</span>(book_exist[k] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.txt_soldout&quot;</span>))){
+          <span class="cf">next</span>
+        }
+        
+        book_page &lt;-<span class="st"> </span><span class="kw">paste0</span>(main_url, page_url[k])
+        chrome<span class="op">$</span><span class="kw">navigate</span>(book_page)
+        book_html &lt;-<span class="st"> </span>chrome<span class="op">$</span><span class="kw">getPageSource</span>()[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">read_html</span>()
+        
+        Title &lt;-<span class="st"> </span>book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.gd_name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()
+        Writer &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">strsplit</span>((book_html <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                     </span><span class="kw">html_node</span>(<span class="st">&quot;.gd_auth&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                     </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                     </span><span class="kw">strsplit</span>(<span class="st">&quot;저&quot;</span>))[[<span class="dv">1</span>]][<span class="dv">1</span>], <span class="st">&quot;엮음&quot;</span>)[[<span class="dv">1</span>]][<span class="dv">1</span>], <span class="st">&quot;both&quot;</span>)
+        
+        Publisher &lt;-<span class="st"> </span>book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.gd_pub&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()
+        Price &lt;-<span class="st"> </span>book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.nor_price&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>()
+        Pagenum &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>(book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;.tb_detail01 .cell_2col&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                  </span><span class="kw">html_text</span>(), <span class="dv">4</span>)
+        
+        Series &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>((book_html <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                  </span><span class="kw">html_node</span>(<span class="dt">xpath =</span> <span class="st">'//*[@id=&quot;spanGdKeynote&quot;]/a[2]'</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                  </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="st">&quot;-&quot;</span>))[[<span class="dv">1</span>]][<span class="dv">1</span>], <span class="dv">1</span>) 
+        
+        Reviewcount &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>(book_html <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                      </span><span class="kw">html_node</span>(<span class="st">&quot;.gd_reviewCount .txC_blue&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                      </span><span class="kw">html_text</span>(), <span class="dv">2</span>)
+        Score &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>(book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.yes_b&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_text</span>(), <span class="dv">2</span>)
+        Sellnum &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>((book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_node</span>(<span class="st">&quot;.gd_sellNum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                   </span><span class="kw">html_text</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">strsplit</span>(<span class="st">&quot; &quot;</span>))[[<span class="dv">1</span>]][<span class="dv">12</span>], <span class="dv">2</span>)
+        Avail19 &lt;-<span class="st"> </span><span class="kw">ChangeNAFunc</span>(((book_html <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">html_nodes</span>(<span class="st">&quot;.tb_detail01 .cell_2col&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                                   </span><span class="kw">html_text</span>())[<span class="dv">5</span>]), <span class="dv">3</span>)
+        
+        book_temp &lt;-<span class="st"> </span><span class="kw">cbind</span>(Title, Writer, Publisher, Series, Price, Pagenum,
+                           Reviewcount, Score, Sellnum, Avail19, Novel, Genre)
+        book_info &lt;-<span class="st"> </span><span class="kw">rbind</span>(book_info, book_temp)
+        <span class="kw">print</span>(<span class="kw">paste0</span>(<span class="st">&quot;i : &quot;</span>, i, <span class="st">&quot; j / page : &quot;</span>, j, <span class="st">&quot; / &quot;</span>, last_page, <span class="st">&quot; k : &quot;</span>, k))
+      }
+    }
+  }
+}
+<span class="kw">write.csv</span>(book_info, <span class="st">&quot;Books_Information.csv&quot;</span>, <span class="dt">row.names =</span> F)</code></pre></div>
+<h2 id="데이터-구조">2.3 데이터 구조</h2>
+<pre><code>##                 Title          Writer           Publisher
+## 1 돌이킬 수 없는 약속   야쿠마루 가쿠            북플라자
+## 2 매스커레이드 나이트 히가시노 게이고            현대문학
+## 3   가면산장 살인사건 히가시노 게이고                재인
+## 4     11문자 살인사건 히가시노 게이고 알에이치코리아(RHK)
+## 5       앨리스 죽이기 코바야시 야스미              검은숲
+## 6     용의자 X의 헌신 히가시노 게이고                재인
+##                Series Price Pagenum Reviewcount Score Sellnum Avail19
+## 1                   X 13500     380         102     8  548595       X
+## 2 매스커레이드 시리즈 13320     556          32     8   55707       X
+## 3                   X 13320     336         134     8   88926       X
+## 4                   X 13320     344          61     8   34083       X
+## 5                   X 12150     364          47     6  149877       X
+## 6                   X 15120     448          51     8   77232       X
+##   Novel Genre
+## 1     x  추리
+## 2     x  추리
+## 3     x  추리
+## 4     x  추리
+## 5     x  추리
+## 6     x  추리
+
+## 'data.frame':    30563 obs. of  12 variables:
+##  $ Title      : Factor w/ 24779 levels &quot;'에드거 앨런 포' 베스트 단편집 : The Best of Edgar Allan Poe (영어 원서)&quot;,..: 5624 7374 616 63 14612 16335 10551 10553 6115 7375 ...
+##  $ Writer     : Factor w/ 8180 levels &quot;&quot;,&quot;(송)이방 등 모음 / 김장환 외 공역&quot;,..: 4351 8165 8165 8165 7202 8165 2601 2601 8165 8165 ...
+##  $ Publisher  : Factor w/ 1657 levels &quot;19.0&quot;,&quot;1984(일구팔사)&quot;,..: 666 1588 1200 959 81 1200 498 498 1588 1588 ...
+##  $ Series     : Factor w/ 107 levels &quot;2013 올해의 책&quot;,..: 12 31 12 12 12 12 12 12 4 31 ...
+##  $ Price      : int  13500 13320 13320 13320 12150 15120 14220 14220 13320 12600 ...
+##  $ Pagenum    : int  380 556 336 344 364 448 516 508 524 344 ...
+##  $ Reviewcount: int  102 32 134 61 47 51 0 0 118 43 ...
+##  $ Score      : int  8 8 8 8 6 8 0 0 8 8 ...
+##  $ Sellnum    : int  548595 55707 88926 34083 149877 77232 3420 3180 65490 15138 ...
+##  $ Avail19    : Factor w/ 2 levels &quot;O&quot;,&quot;X&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Novel      : Factor w/ 14 levels &quot;x&quot;,&quot;기타 국가의 소설&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Genre      : Factor w/ 8 levels &quot;SF&quot;,&quot;X&quot;,&quot;공포&quot;,..: 7 7 7 7 7 7 7 7 7 7 ...</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>변수</th>
+<th>변수설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Title</td>
+<td>책 제목</td>
+</tr>
+<tr class="even">
+<td>Writer</td>
+<td>작가</td>
+</tr>
+<tr class="odd">
+<td>Publisher</td>
+<td>출판사</td>
+</tr>
+<tr class="even">
+<td>Series</td>
+<td>시리즈 ex) 아서 코난 도일 시리즈, 링컨 라임 시리즈</td>
+</tr>
+<tr class="odd">
+<td>Price</td>
+<td>책 가격</td>
+</tr>
+<tr class="even">
+<td>Pagenum</td>
+<td>총 페이지 쪽수</td>
+</tr>
+<tr class="odd">
+<td>Reviewcount</td>
+<td>리뷰 갯수</td>
+</tr>
+<tr class="even">
+<td>Score</td>
+<td>평점</td>
+</tr>
+<tr class="odd">
+<td>Sellnum</td>
+<td>판매지수</td>
+</tr>
+<tr class="even">
+<td>Avail19</td>
+<td>19세 미만 여부</td>
+</tr>
+<tr class="odd">
+<td>Novel</td>
+<td>소설 분류 ex) 한국소설, 일본소설 ..(국가분류)</td>
+</tr>
+<tr class="even">
+<td>Genre</td>
+<td>장르</td>
+</tr>
+</tbody>
+</table>
+<h1 id="데이터-전처리-preprocessing">3. 데이터 전처리 (PreProcessing)</h1>
+<hr />
+<h2 id="라이브러리">3.1 라이브러리</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(reshape2)
+<span class="kw">library</span>(Hmisc)</code></pre></div>
+<pre><code>## Loading required package: lattice
+
+## Loading required package: survival
+
+## Loading required package: Formula
+
+## Loading required package: ggplot2
+
+## 
+## Attaching package: 'Hmisc'
+
+## The following objects are masked from 'package:base':
+## 
+##     format.pval, units</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'dplyr'
+
+## The following objects are masked from 'package:Hmisc':
+## 
+##     src, summarize
+
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyr)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'tidyr'
+
+## The following object is masked from 'package:reshape2':
+## 
+##     smiths</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)</code></pre></div>
+<pre><code>## 
+## Attaching package: 'data.table'
+
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, first, last
+
+## The following objects are masked from 'package:reshape2':
+## 
+##     dcast, melt</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fastDummies)
+<span class="kw">library</span>(RODBC)
+<span class="kw">library</span>(RMySQL)</code></pre></div>
+<pre><code>## Loading required package: DBI</code></pre>
+<h2 id="이상치-결측치-확인">3.2 이상치, 결측치 확인</h2>
+<pre><code>## book_info 
+## 
+##  12  Variables      30563  Observations
+## ---------------------------------------------------------------------------
+## Title 
+##        n  missing distinct 
+##    30563        0    24779 
+## 
+## lowest : '에드거 앨런 포' 베스트 단편집 : The Best of Edgar Allan Poe (영어 원서)   (그 느낌 그대로) 국어 교과서 단편소설 1집                                  (그 느낌 그대로) 국어 교과서 단편소설 2집                                  (그동안 숨겨진 희귀본) 그림형제 동화 1집 : Grimms' Fairy Tales (영어 원서) (그동안 숨겨진 희귀본) 그림형제 동화 2집 : Grimms' Fairy Tales (영어 원서)
+## highest: 힉스Higgs                                                                  힐                                                                         힐 하우스의 수상한 여자들                                                  힐 하우스의 유령                                                           힘겨운 사랑                                                               
+## ---------------------------------------------------------------------------
+## Writer 
+##        n  missing distinct 
+##    30563        0     8180 
+## 
+## lowest :                                         (송)이방 등 모음 / 김장환 외 공역       2017 서울영서초 6학년, 신옥경 공        303행성                                 30cm_books 편                          
+## highest: 히사오 주란                             히사오 주란, 노무라 고도, 오카모토 기도 힐러리 맨틀                             힐러리 멘텔                             힘센소설가 7인 외                      
+## ---------------------------------------------------------------------------
+## Publisher 
+##        n  missing distinct 
+##    30562        1     1657 
+## 
+## lowest : 19.0                    1984(일구팔사)          1984Books(일구팔사북스) 21세기북스              30cm                   
+## highest: 희고희고                희담                    희망과하라시비츠        힐북                    힘써                   
+## ---------------------------------------------------------------------------
+## Series 
+##        n  missing distinct 
+##    30563        0      107 
+## 
+## lowest : 2013 올해의 책         2014 올해의 책         2015 올해의 책         2016 올해의 책         2017 올해의 책        
+## highest: 행복한 탐정 시리즈     헛소리 시리즈          현대문학 핀 시리즈     현대지성 클래식        형사 해리 홀레 시리즈 
+## ---------------------------------------------------------------------------
+## Price 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    30563        0      559    0.983    11849     6583     6750     7200 
+##      .25      .50      .75      .90      .95 
+##     7200    10450    12420    14250    20700 
+## 
+## lowest :    1800    2250    2400    2520    2700
+## highest:  486000  558000  585000  990000 2375000
+## ---------------------------------------------------------------------------
+## Pagenum 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    30281      282      998        1    376.4      186      176      220 
+##      .25      .50      .75      .90      .95 
+##      288      318      400      519      610 
+## 
+## lowest :     1    17    29    32    33, highest: 12840 19000 19600 20600 30000
+## ---------------------------------------------------------------------------
+## Reviewcount 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    30563        0      253    0.853    8.015    13.55        0        0 
+##      .25      .50      .75      .90      .95 
+##        0        0        6       21       38 
+## 
+## lowest :    0    1    2    3    4, highest:  732  797  832  869 1043
+## ---------------------------------------------------------------------------
+## Score 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    30563        0       10    0.826    3.714    4.135        0        0 
+##      .25      .50      .75      .90      .95 
+##        0        0        8        8        9 
+##                                                                       
+## Value          0     2     3     4     5     6     7     8     9    10
+## Frequency  16091    20    11    59   118  1504  1647  9219   634  1260
+## Proportion 0.526 0.001 0.000 0.002 0.004 0.049 0.054 0.302 0.021 0.041
+## ---------------------------------------------------------------------------
+## Sellnum 
+##        n  missing distinct     Info     Mean      Gmd      .05      .10 
+##    30563        0     1723    0.973      898     1653        0        0 
+##      .25      .50      .75      .90      .95 
+##        0       36      222     1058     2652 
+## 
+## lowest :      0     12     18     24     30, highest: 232734 548595 563541 572619 817959
+## ---------------------------------------------------------------------------
+## Avail19 
+##        n  missing distinct 
+##    30563        0        2 
+##                       
+## Value          O     X
+## Frequency     96 30467
+## Proportion 0.003 0.997
+## ---------------------------------------------------------------------------
+## Novel 
+##        n  missing distinct 
+##    30563        0       14 
+## 
+## x (13978, 0.457), 기타 국가의 소설 (615, 0.020), 독일소설 (947, 0.031),
+## 동유럽소설 (143, 0.005), 러시아소설 (621, 0.020), 북유럽소설 (233, 0.008),
+## 스페인/중남미소설 (311, 0.010), 영미소설 (3501, 0.115), 이탈리아소설 (194,
+## 0.006), 일본소설 (2335, 0.076), 작가 선집 (395, 0.013), 중국소설 (899,
+## 0.029), 프랑스소설 (1646, 0.054), 한국소설 (4745, 0.155)
+## ---------------------------------------------------------------------------
+## Genre 
+##        n  missing distinct 
+##    30563        0        8 
+##                                                                   
+## Value          SF      X   공포   무협 스릴러   역사   추리 판타지
+## Frequency     592  16585    684   3145    849   2117   1989   4602
+## Proportion  0.019  0.543  0.022  0.103  0.028  0.069  0.065  0.151
+## ---------------------------------------------------------------------------
+
+##                   Title                   Writer     
+##  데미안              :   49   애거사 크리스티:  388  
+##  젊은 베르테르의 슬픔:   40   아서 코난 도일 :  349  
+##  어린 왕자           :   37   레프 톨스토이  :  162  
+##  위대한 개츠비       :   37   나관중         :  150  
+##  노인과 바다         :   31   모리스 르블랑  :  147  
+##  이방인              :   29   헤르만 헤세    :  132  
+##  (Other)             :30340   (Other)        :29235  
+##                   Publisher                             Series     
+##  청어람                : 1565   X                          :30192  
+##  문학동네              : 1259   창비 큰글자도서            :   28  
+##  로크미디어            : 1059   한국 대표소설 선집         :   25  
+##  파피루스(디앤씨미디어):  896   시공사 장르문학 시리즈     :   24  
+##  어울림출판사          :  862   타우누스                   :   12  
+##  (Other)               :24921   사립탐정 켄지&amp;제나로 시리즈:   11  
+##  NA's                  :    1   (Other)                    :  271  
+##      Price            Pagenum         Reviewcount           Score       
+##  Min.   :   1800   Min.   :    1.0   Min.   :   0.000   Min.   : 0.000  
+##  1st Qu.:   7200   1st Qu.:  288.0   1st Qu.:   0.000   1st Qu.: 0.000  
+##  Median :  10450   Median :  318.0   Median :   0.000   Median : 0.000  
+##  Mean   :  11849   Mean   :  376.4   Mean   :   8.015   Mean   : 3.714  
+##  3rd Qu.:  12420   3rd Qu.:  400.0   3rd Qu.:   6.000   3rd Qu.: 8.000  
+##  Max.   :2375000   Max.   :30000.0   Max.   :1043.000   Max.   :10.000  
+##                    NA's   :282                                          
+##     Sellnum       Avail19          Novel           Genre      
+##  Min.   :     0   O:   96   x         :13978   X      :16585  
+##  1st Qu.:     0   X:30467   한국소설  : 4745   판타지 : 4602  
+##  Median :    36             영미소설  : 3501   무협   : 3145  
+##  Mean   :   898             일본소설  : 2335   역사   : 2117  
+##  3rd Qu.:   222             프랑스소설: 1646   추리   : 1989  
+##  Max.   :817959             독일소설  :  947   스릴러 :  849  
+##                             (Other)   : 3411   (Other): 1276</code></pre>
+<p>결측치는 Pagenum에서 282개, Publisher에서 1개 확인됐다.<br />
+먼저 Publisher 결측치를 확인해보자.</p>
+<pre><code>##                                Title      Writer Publisher Series Price
+## 26240 어린왕자 소설 &amp; 컬러링 북 세트 생 텍쥐페리      &lt;NA&gt;      X 21600
+##       Pagenum Reviewcount Score Sellnum Avail19      Novel Genre
+## 26240     272          11    10       0       X 프랑스소설     X</code></pre>
+<p><em>확인 결과 yes24 페이지에서 출판사 정보가 없어 결측치로 삽입됐다.</em></p>
+<pre><code>##                                    Title            Writer
+## 35        코너스톤 아르센 뤼팽 전집 세트     모리스 르블랑
+## 221            명탐정 푸아로 베스트 세트   애거사 크리스티
+## 287              죽지 않는 학생 살인사건       노자키 마도
+## 304            만능감정사 Q의 사건수첩 7 마츠오카 케이스케
+## 431  결정판 아르센 뤼팽 전집 1-10권 세트     모리스 르블랑
+## 464                   베를린 누와르 세트           필립 커
+## 472   셜록 홈즈 에센셜 에디션 01+02 세트    아서 코난 도일
+## 546           셜록 홈스 전집 단편집 세트    아서 코난 도일
+## 555                               파편 2            홍수연
+## 556                            파편 세트            홍수연
+## 576                방해자 상, 하 2권 SET     오쿠다 히데오
+## 587             셜록 홈스 전집 장편 세트    아서 코난 도일
+## 722             셜록홈즈의 마지막 인사 1    아서 코난 도일
+## 723             셜록홈즈의 마지막 인사 2    아서 코난 도일
+## 724             셜록홈즈의 마지막 인사 3    아서 코난 도일
+## 1216                       목련이 피었다            서미애
+## 1293                셜록홈즈 단편 베스트    아서 코난 도일
+## 1618                    푸코의 진자 세트     움베르토 에코
+## 1998             러브크래프트 전집 세트  H.P. 러브크래프트
+## 2033             죽지 않는 학생 살인사건       노자키 마도
+##              Publisher Series  Price Pagenum Reviewcount Score Sellnum
+## 35      코너스톤(도서)      X  58500      NA           0     0    2628
+## 221           황금가지      X  40000      NA           1    10    1974
+## 287     영상출판미디어      X   8100      NA           2     6     294
+## 304     영상출판미디어      X   9000      NA           7     8     258
+## 431       arte(아르테)      X 285300      NA          19     8       0
+## 464           북스피어      X  37260      NA           0     0     378
+## 472     코너스톤(도서)      X  27000      NA           7     8       0
+## 546           엘릭시르      X  68400      NA           2    10      96
+## 555  파란 (파란미디어)      X  11700      NA           8     7     120
+## 556  파란 (파란미디어)      X  23400      NA          36     8     738
+## 576           북스토리      X  27000      NA          24     8       0
+## 587           엘릭시르      X  46800      NA           4     8      72
+## 722               큰글      X  23000      NA           0     0       0
+## 723               큰글      X  23000      NA           0     0       0
+## 724               큰글      X  23000      NA           0     0       0
+## 1216            청어람      X   9900      NA           9     8     144
+## 1293      시간과공간사      X   5400      NA           0     0       0
+## 1618          열린책들      X  34560      NA          42     7       0
+## 1998          황금가지      X  73350      NA           2     7    2895
+## 2033    영상출판미디어      X   8100      NA           2     6     294
+##      Avail19 Novel Genre
+## 35         X     x  추리
+## 221        X     x  추리
+## 287        X     x  추리
+## 304        X     x  추리
+## 431        X     x  추리
+## 464        X     x  추리
+## 472        X     x  추리
+## 546        X     x  추리
+## 555        X     x  추리
+## 556        X     x  추리
+## 576        X     x  추리
+## 587        X     x  추리
+## 722        X     x  추리
+## 723        X     x  추리
+## 724        X     x  추리
+## 1216       X     x  추리
+## 1293       X     x  추리
+## 1618       X     x  추리
+## 1998       X     x  공포
+## 2033       X     x  공포</code></pre>
+<p><em>20개의 데이터만 확인 해본 결과 단일 책이 아닌 세트로 구성되어 있어서</em><br />
+<em>쪽수 정보가 페이지에 없기 때문에 결측치로 삽입됐다.</em></p>
+<p><em>세트 데이터는 단일품만으로도 충분히 추천시스템을 구현할 수 있고 무엇보다 데이터가 지저분하다고 판단되어 제거하기로 결정했다.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">book_info &lt;-<span class="st"> </span>book_info <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Pagenum) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(Publisher))</code></pre></div>
+
+</body>
+</html>
